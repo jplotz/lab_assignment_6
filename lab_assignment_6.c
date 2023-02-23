@@ -1,8 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int search(int numbers[], int low, int high, int value) 
 {
-	return -1;
+    int mid = (low/2) + (high/2);
+
+    if (numbers[mid] == value)
+        return mid;
+    else if (numbers[mid] < value)
+        low = mid + 1;
+    else if (numbers[mid] > value)
+        high = mid - 1;
+
+    if (low > high)
+        return -1;
+    search(numbers, low, high, value);
 }
 
 void printArray(int numbers[], int sz)
@@ -44,14 +56,15 @@ int main(void)
 		printArray(numArray, countOfNums);
 		value = average / countOfNums;
 		index = search(numArray, 0, countOfNums - 1, value);
-		if (index >= 0)
-		{
-			printf("Item %d exists in the number array at index %d!\n",value, index);
-		}
-		else
-		{
-			printf("Item %d does not exist in the number array!\n", value);
-		}
+        printf("value: %d\nindex: %d\n", value, index);
+		//if (index >= 0)
+		//{
+		//	printf("Item %d exists in the number array at index %d!\n",value, index);
+		//}
+		//else
+		//{
+		//	printf("Item %d does not exist in the number array!\n", value);
+		//}
 
 		free(numArray);
 	}
